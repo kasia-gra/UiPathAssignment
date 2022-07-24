@@ -1,0 +1,306 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PrepareInputData" this:PrepareInputData.in_VendorsInputFilePath="C:\Users\Kasia\OneDrive\Pulpit\UiPath RPA Developer - assignment\UiPath assessment\data\Office Samurai VMD process - vendors input file.xlsx" this:PrepareInputData.in_CountryCodesFilePath="C:\Users\Kasia\OneDrive\Pulpit\UiPath RPA Developer - assignment\UiPath assessment\data\country codes.xlsx" this:PrepareInputData.in_ApprovalRulesFilePath="C:\Users\Kasia\OneDrive\Pulpit\UiPath RPA Developer - assignment\UiPath assessment\data\approval rules.xlsx" this:PrepareInputData.in_VendorsInputFileSheetName="VMD" this:PrepareInputData.in_CountryCodesFileSheetName="country codes" this:PrepareInputData.in_ApprovalRulesSheetName="approval rules" this:PrepareInputData.in_ColumnNameWithCountryCodeExtractedFromVATNumber="CountryCodeFromVATNumber" this:PrepareInputData.in_ColumnNameWithCountryCodeFromCountryCodesTable="A2 (ISO)" this:PrepareInputData.in_ColumnNameWithVATNumber="VAT" this:PrepareInputData.in_ColumnNameApprovalGroupFromCountryCodes="Approval group" this:PrepareInputData.in_ColumnNameApprovalGroup="Approval group" this:PrepareInputData.in_ColumnNameFormattedVATNumber="VATNumberFormatted" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_VendorsInputFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_CountryCodesFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_ApprovalRulesFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_VendorsInputFileSheetName" Type="InArgument(x:String)" />
+    <x:Property Name="in_CountryCodesFileSheetName" Type="InArgument(x:String)" />
+    <x:Property Name="in_ApprovalRulesSheetName" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameWithCountryCodeExtractedFromVATNumber" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameWithCountryCodeFromCountryCodesTable" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameWithVATNumber" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameApprovalGroupFromCountryCodes" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameApprovalGroup" Type="InArgument(x:String)" />
+    <x:Property Name="DT_CompleteInputData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_ColumnNameFormattedVATNumber" Type="InArgument(x:String)" />
+    <x:Property Name="in_ColumnNameVATWithCountryCode" Type="InArgument(x:String)" />
+    <x:Property Name="in_PathToProcessedInputFile" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>796,3276</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PrepareInputData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="31">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="56">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PrepareInputData" sap:VirtualizedContainerService.HintSize="685.6,3211.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_VendorsInput" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_CountryCodes" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_ApprovalRules" />
+      <Variable x:TypeArguments="x:String" Default="Prepare Input Data" Name="ComponentName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_CountryCodesAndApprovalGroups" />
+      <Variable x:TypeArguments="x:Int32" Name="RowIndex" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="644,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start: &quot; + ComponentName]" />
+    <ui:ReadRange AddHeaders="True" DataTable="[DT_VendorsInput]" DisplayName="Read Range Vendors Input" sap:VirtualizedContainerService.HintSize="644,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[in_VendorsInputFileSheetName]" WorkbookPath="[in_VendorsInputFilePath]">
+      <ui:ReadRange.Range>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:ReadRange.Range>
+    </ui:ReadRange>
+    <ui:AddDataColumn x:TypeArguments="x:Int32" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="RowIndex" DataTable="[DT_VendorsInput]" DisplayName="Add Column RowIndex" sap:VirtualizedContainerService.HintSize="644,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_8" />
+    <Assign DisplayName="Set RowIndex to 1 (starting row)" sap:VirtualizedContainerService.HintSize="644,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[RowIndex]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">1</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_ColumnNameWithCountryCodeExtractedFromVATNumber]" DataTable="[DT_VendorsInput]" DisplayName="Add Data for country code" sap:VirtualizedContainerService.HintSize="644,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[DT_VendorsInput]" DisplayName="For Each Row in Data Table add row index &amp; extract country code from VAT number for each row and add to new column" sap:VirtualizedContainerService.HintSize="644,732.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="VendorDataRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Extract country code from VAT number for each row and add to new column" sap:VirtualizedContainerService.HintSize="610.4,612" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="CountryCodeFromVATNumber" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign VendorDataRow(&quot;RowIndex&quot;)" sap:VirtualizedContainerService.HintSize="568.8,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[VendorDataRow("RowIndex")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[RowIndex]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Increase RowIndex " sap:VirtualizedContainerService.HintSize="568.8,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RowIndex]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[RowIndex + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[VendorDataRow(in_ColumnNameWithVATNumber).ToString.Trim.Length &gt;= 2]" DisplayName="Extract country code from VAT number for each row and add to new column" sap:VirtualizedContainerService.HintSize="568.8,219.2" sap2010:WorkflowViewState.IdRef="If_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Assign DisplayName="Assign CountryCodeFromVATNumber" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[CountryCodeFromVATNumber]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[VendorDataRow(in_ColumnNameWithVATNumber).ToString.Trim.Substring(0,2).ToUpper]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+              <If.Else>
+                <Assign DisplayName="Assign CountryCodeFromVATNumber" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[CountryCodeFromVATNumber]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">
+                      <Literal x:TypeArguments="x:String" Value="" />
+                    </InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Else>
+            </If>
+            <Assign DisplayName="Add CountryCodeFromVATNumber to row data " sap:VirtualizedContainerService.HintSize="568.8,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[VendorDataRow(in_ColumnNameWithCountryCodeExtractedFromVATNumber)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[CountryCodeFromVATNumber]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ReadRange AddHeaders="True" DataTable="[DT_CountryCodes]" DisplayName="Read Range Country Codes" sap:VirtualizedContainerService.HintSize="644,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[in_CountryCodesFileSheetName]" WorkbookPath="[in_CountryCodesFilePath]">
+      <ui:ReadRange.Range>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:ReadRange.Range>
+    </ui:ReadRange>
+    <ui:ReadRange AddHeaders="True" DataTable="[DT_ApprovalRules]" DisplayName="Read Range Approval Rules" sap:VirtualizedContainerService.HintSize="644,88" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[in_ApprovalRulesSheetName]" WorkbookPath="[in_ApprovalRulesFilePath]">
+      <ui:ReadRange.Range>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:ReadRange.Range>
+    </ui:ReadRange>
+    <ui:JoinDataTables DataTable1="[DT_CountryCodes]" DataTable2="[DT_ApprovalRules]" DisplayName="Join Data Tables Country Codes &amp; Approval Grpups " sap:VirtualizedContainerService.HintSize="644,60" sap2010:WorkflowViewState.IdRef="JoinDataTables_2" JoinType="Inner" OutputDataTable="[DT_CountryCodesAndApprovalGroups]">
+      <ui:JoinDataTables.Arguments>
+        <scg:List x:TypeArguments="ui:JoinOperationArgument" Capacity="4">
+          <ui:JoinOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EQ">
+            <ui:JoinOperationArgument.Column1>
+              <InArgument x:TypeArguments="x:String">[in_ColumnNameApprovalGroupFromCountryCodes]</InArgument>
+            </ui:JoinOperationArgument.Column1>
+            <ui:JoinOperationArgument.Column2>
+              <InArgument x:TypeArguments="x:String">[in_ColumnNameApprovalGroup]</InArgument>
+            </ui:JoinOperationArgument.Column2>
+          </ui:JoinOperationArgument>
+        </scg:List>
+      </ui:JoinDataTables.Arguments>
+    </ui:JoinDataTables>
+    <ui:JoinDataTables DataTable1="[DT_VendorsInput]" DataTable2="[DT_CountryCodesAndApprovalGroups]" DisplayName="Join Vendor Data with Country Codes And Approval Groups" sap:VirtualizedContainerService.HintSize="644,60" sap2010:WorkflowViewState.IdRef="JoinDataTables_1" JoinType="Left" OutputDataTable="[DT_CompleteInputData]">
+      <ui:JoinDataTables.Arguments>
+        <scg:List x:TypeArguments="ui:JoinOperationArgument" Capacity="4">
+          <ui:JoinOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EQ">
+            <ui:JoinOperationArgument.Column1>
+              <InArgument x:TypeArguments="x:String">[in_ColumnNameWithCountryCodeExtractedFromVATNumber]</InArgument>
+            </ui:JoinOperationArgument.Column1>
+            <ui:JoinOperationArgument.Column2>
+              <InArgument x:TypeArguments="x:String">[in_ColumnNameWithCountryCodeFromCountryCodesTable]</InArgument>
+            </ui:JoinOperationArgument.Column2>
+          </ui:JoinOperationArgument>
+        </scg:List>
+      </ui:JoinDataTables.Arguments>
+    </ui:JoinDataTables>
+    <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_ColumnNameFormattedVATNumber]" DataTable="[DT_CompleteInputData]" DisplayName="Add Column for storing formatted VAT (without country code)" sap:VirtualizedContainerService.HintSize="644,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_3" />
+    <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_ColumnNameVATWithCountryCode]" DataTable="[DT_CompleteInputData]" DisplayName="Add Column for storing formatted VAT with Country Code" sap:VirtualizedContainerService.HintSize="644,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_6" />
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[DT_CompleteInputData]" DisplayName="For Each Row in Data Table add formatted VAT number" sap:VirtualizedContainerService.HintSize="644,745.6" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="InputRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="For Each Row in Data Table add formatted VAT number" sap:VirtualizedContainerService.HintSize="524.8,624.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="InputVATNumberRaw" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign InputRow(ColumnNameWithVATNumber).ToString.Trim" sap:VirtualizedContainerService.HintSize="483.2,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[InputVATNumberRaw]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[InputRow(in_ColumnNameWithVATNumber).ToString.TrimStart.TrimEnd]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[InputVATNumberRaw.Length &gt; 2]" DisplayName="If InputVATNumberRaw.Length &gt; 2 extract VAT number to new column, otherwise leave column empty " sap:VirtualizedContainerService.HintSize="483.2,432" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="304,252.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign InputRow(in_ColumnNameFormattedVATNumber)" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[InputRow(in_ColumnNameFormattedVATNumber)]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[InputVATNumberRaw.Substring(2).Trim]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign InputRow(in_ColumnNameWithCountryCode)" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[InputRow(in_ColumnNameVATWithCountryCode)]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[InputVATNumberRaw.Trim.Substring(0,2) + InputRow(in_ColumnNameFormattedVATNumber).ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" Unique="{x:Null}" ColumnName="Exception Message" DataTable="[DT_CompleteInputData]" DefaultValue="NA" DisplayName="Add Column Exception Message" sap:VirtualizedContainerService.HintSize="644,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_5" MaxLength="-1" />
+    <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" sap2010:Annotation.AnnotationText="(after joining other tabls sorting is neede to reflect th sam order as in orginal vendor input table)" ColumnName="RowIndex" DataTable="[DT_CompleteInputData]" DisplayName="Sort DT_CompleteInputData" sap:VirtualizedContainerService.HintSize="644,98.4" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[DT_CompleteInputData]" SortOrder="Ascending">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:SortDataTable>
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_PathToProcessedInputFile]" DisplayName="Copy File in_VendorsInputFilePath to Output files" sap:VirtualizedContainerService.HintSize="433.6,160" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_VendorsInputFilePath]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="644,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;End: &quot; + ComponentName]" />
+  </Sequence>
+</Activity>
